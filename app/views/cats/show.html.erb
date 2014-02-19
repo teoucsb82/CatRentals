@@ -1,1 +1,20 @@
-THis is my show page
+<h1><%= @cat.name %></h1>
+
+<table border=1>
+  <tr>
+    <th width="20%">Age</th>
+    <th width="20%">Color</th>
+    <th width="20%">Birthdate</th>
+    <th width="20%">Sex</th>
+  </tr>
+
+  <tr>
+    <td><%= @cat.age %></td>
+    <td><%= @cat.color %></td>
+    <td><%= @cat.birth_date %></td>
+    <td><%= @cat.sex %></td>
+  </tr>
+
+</table>
+
+<%= link_to "Edit ", edit_cat_url(@cat) %> | <%= link_to "Back", cats_url %>

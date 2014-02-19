@@ -1,0 +1,37 @@
+
+
+<form action="<%= cats_url %>" method="post">
+
+  <label for="name">Name: </label>
+  <input type="text" name="cat[name]" id="name" value="<%= @cat.name %>" /><br>
+
+  <label for="age">Age: </label>
+  <input type="text" name="cat[age]" id="age" value="<%= @cat.age %>" /><br>
+
+  <label for="birth_date">Birth Date: </label>
+  <input type="date" name="cat[birth_date]" id="birth_date" value="<%= @cat.birth_date %>" /><br>
+
+
+
+  <label for="color">Coat color</label>
+   <!-- dropdown -->
+   <select name="cat[color]" id="color">
+     <!-- `brown`, if selected, is the value that will be submitted to
+          the server; user is displayed "Brown" as the choice -->
+     <option></option>
+     <% %w(black gray white brown tan orange calico tortie).sort.each do |c| %>
+       <% c.capitalize! %>
+       <option value="<%= c %>"><%= c %></option>
+     <% end %>
+   </select>
+   <br>
+
+  Sex:
+  <label for="sex_m">Male</label>
+  <input type="radio" name="cat[sex]" id="sex_m" value = "M" />
+  <label for="sex_f">Female</label>
+  <input type="radio" name="cat[sex]" id="sex_f" value = "F" /><br>
+
+  <input type="submit">
+
+</form>
