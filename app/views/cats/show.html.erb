@@ -1,20 +1,24 @@
-<h1><%= @cat.name %></h1>
+<center>
 
-<table border=1>
-  <tr>
-    <th width="20%">Age</th>
-    <th width="20%">Color</th>
-    <th width="20%">Birthdate</th>
-    <th width="20%">Sex</th>
-  </tr>
+  <h1><%= @cat.name %></h1>
+  <hr>
 
-  <tr>
-    <td><%= @cat.age %></td>
-    <td><%= @cat.color %></td>
-    <td><%= @cat.birth_date %></td>
-    <td><%= @cat.sex %></td>
-  </tr>
+  <table border=1>
+    <tr>
+      <th width="20%">Age</th>
+      <th width="20%">Color</th>
+      <th width="20%">Birthdate</th>
+      <th width="20%">Sex</th>
+    </tr>
 
-</table>
+    <tr>
+      <td><%= @cat.age %></td>
+      <td><%= @cat.color %></td>
+      <td><%= @cat.birth_date %></td>
+      <td><%= @cat.sex %></td>
+    </tr>
 
+  </table>
+</center>
+<hr>
 <%= link_to "Edit ", edit_cat_url(@cat) %> | <%= link_to "Back", cats_url %>
