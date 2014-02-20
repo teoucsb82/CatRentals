@@ -6,7 +6,11 @@ CatsRental::Application.routes.draw do
   # You can have the root of your site routed with "root"
    root 'cats#index'
    resources :cats
-   resources :cat_rental_requests
+   resources :cat_rental_requests, :only => [:create, :new] do
+    post "approve", :on => :member
+    post "deny", :on => :member
+  end
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -26,6 +26,7 @@
       <th width="20%">Start Date</th>
       <th width="20%">End Date</th>
       <th width="20%">Status</th>
+      <th width="20%">Action</th>
     </tr>
 
     <% @cat.cat_rental_requests.each do |request| %>
@@ -33,10 +34,13 @@
         <td><%= request.start_date %></td>
         <td><%= request.end_date %></td>
         <td><%= request.status %></td>
+        <td><%= button_to "Approve", approve_cat_rental_request_url(request) %>
+            <%= button_to "Deny", deny_cat_rental_request_url(request) %></td>
       </tr>
     <% end %>
 
   </table>
 </center>
 <hr>
+<p><%= link_to "Request a cat", new_cat_rental_request_url %></p>
 <%= link_to "Edit ", edit_cat_url(@cat) %> | <%= link_to "Back", cats_url %>

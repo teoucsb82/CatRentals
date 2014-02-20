@@ -2,8 +2,17 @@ class CatRentalRequestsController < ApplicationController
 
   def index
     @cat_rental_requests = CatRentalRequest.all
-
     render :index
+  end
+
+  def approve
+    get_cat_rental_request.approve!
+    redirect_to cat_url(current_cat)
+  end
+
+  def deny
+    get_cat_rental_request.deny!
+    redirect_to cat_url(current_cat)
   end
 
   def show
@@ -23,23 +32,7 @@ class CatRentalRequestsController < ApplicationController
       redirect_to cat_url(@cat_rental_request.cat)
     else
       flash[:errors] = @cat_rental_request.errors.full_messages
-      # redirect_to new_cat_url
       render :new
-    end
-  end
-
-  def edit
-    get_cat_rental_request
-    render :edit
-  end
-
-  def update
-    get_cat_rental_request
-    if @cat_rental_request.update_attributes(cat_rental_request_params)
-      redirect_to cat_rental_request_url(@cat_rental_request)
-    else
-      flash[:errors] = @cat_rental_request.errors.full_messages
-      render :edit
     end
   end
 
@@ -50,6 +43,10 @@ class CatRentalRequestsController < ApplicationController
 
   def cat_rental_request_params
     params.require(:cat_rental_request).permit(:cat_id, :start_date, :end_date, :status)
+  end
+
+  def current_cat
+    get_cat_rental_request.cat
   end
 
 end
