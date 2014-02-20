@@ -1,0 +1,43 @@
+@import url(http://fonts.googleapis.com/css?family=Carme);                  /* display font */
+@import url(http://fonts.googleapis.com/css?family=Varela+Round);                  /* 'coding' font */
+
+$baseFontFamily: Carme;
+$headingsFontFamily: Varela Round;
+
+$navbarBackgroundHighlight: #fc0;               /* yellow 255, 204, 0, used for links and top splash bar */
+$navbarBackground: $navbarBackgroundHighlight;  /* top splash bar color*/
+$linkColor: $navbarBackgroundHighlight;         /* link color */
+$navbarHeight: 3px;
+                  
+$accentColor: #f00;            /* accent color used for <hr> */
+
+$bodyBackground: #333;								/* grey */
+
+$textColor: #ddd;     /* light gray 221,221,221 */
+
+$linkColorHover: #f90;
+
+@import 'bootstrap';
+body{
+    padding-top: 30px;
+}
+
+@import 'bootstrap-responsive';
+
+a {
+    text-decoration: none;
+    transition: all .4s;
+    -moz-transition: all .4s;
+    -webkit-transition: all .4s;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+hr {
+    display: block; height: 1px;
+    border: 0; border-top: 1px solid $accentColor;
+    margin: 1em 0; padding: 0;
+}
+
