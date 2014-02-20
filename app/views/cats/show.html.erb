@@ -1,27 +1,26 @@
+<% provide(:title,  @cat.name ) %>
 <center>
 
-  <h1><%= @cat.name %></h1>
-  <hr>
-
-  <table border=1>
+  <h1><%= yield(:title) %></h1>
+  <table class="table" border="1" style="border: solid">
     <tr>
-      <th width="20%">Age</th>
-      <th width="20%">Color</th>
-      <th width="20%">Birthdate</th>
-      <th width="20%">Sex</th>
+      <th><center>Age</center></th>
+      <th><center>Color</center></th>
+      <th><center>Birthdate</center></th>
+      <th><center>Sex</center></th>
     </tr>
-
     <tr>
-      <td><%= @cat.age %></td>
-      <td><%= @cat.color %></td>
-      <td><%= @cat.birth_date %></td>
-      <td><%= @cat.sex %></td>
+      <td><center><%= @cat.age %></center></td>
+      <td><center><%= @cat.color %></center></td>
+      <td><center><%= @cat.birth_date.strftime("%B %d, %Y") %></center></td>
+      <td><center><%= @cat.sex %></center></td>
     </tr>
-
   </table>
 
+	<hr>
+
   <h1>Rental Requests</h1>
-  <table border=1>
+  <table class="table">
     <tr>
       <th width="20%">Start Date</th>
       <th width="20%">End Date</th>
@@ -31,8 +30,8 @@
 
     <% @cat.cat_rental_requests.each do |request| %>
       <tr>
-        <td><%= request.start_date %></td>
-        <td><%= request.end_date %></td>
+        <td><%= request.start_date.strftime("%B %d, %Y") %></td>
+        <td><%= request.end_date.strftime("%B %d, %Y") %></td>
         <td><%= request.status %></td>
         <% if request.status == "PENDING" %>
           <td>

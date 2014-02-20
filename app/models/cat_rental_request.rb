@@ -60,7 +60,7 @@ class CatRentalRequest < ActiveRecord::Base
 
     requests = cat.cat_rental_requests
     requests.each do |request|
-      next if request.status != "APPROVED" 
+      next if request.status != "APPROVED"
       booked_start_date = request.start_date
       booked_end_date = request.end_date
 
