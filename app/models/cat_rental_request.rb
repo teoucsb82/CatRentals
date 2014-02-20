@@ -8,8 +8,14 @@ class CatRentalRequest < ActiveRecord::Base
   belongs_to  :cat
 
   def approve!
-    self.status = "APPROVED"
-    self.save!
+    transaction do
+      self.status = "APPROVED"
+      self.save!
+
+      overlapping_pending_requests.each do |request|
+        request.deny!
+      end
+    end
   end
 
   def deny!
@@ -17,22 +23,40 @@ class CatRentalRequest < ActiveRecord::Base
     self.save!
   end
 
-  def overlapping_requests
-    # Get cat rental requests
+  def overlapping_pending_requests
     requests = cat.cat_rental_requests
+    [].tap do |conflicting_requests|
+      requests.each do |request|
+        next if request.status != "PENDING" || request == self
+        booked_start_date = request.start_date
+        booked_end_date = request.end_date
 
+        proposed_start_date = start_date
+        proposed_end_date = end_date
+
+        if (proposed_start_date < booked_end_date && proposed_end_date > booked_start_date) ||
+         (proposed_start_date > proposed_end_date)
+          conflicting_requests << request
+        end
+      end
+    end
+  end
+
+  def overlapping_requests
+    return if self.status == "DENIED"
+
+    requests = cat.cat_rental_requests
     requests.each do |request|
-      next if request.status != "APPROVED"
+      next if request.status != "APPROVED" 
       booked_start_date = request.start_date
       booked_end_date = request.end_date
 
       proposed_start_date = start_date
       proposed_end_date = end_date
 
-      if (proposed_start_date > booked_start_date && proposed_start_date < booked_end_date) ||
-         (proposed_start_date < booked_start_date && proposed_end_date < booked_end_date && proposed_end_date > booked_start_date) ||
-         (proposed_start_date < booked_start_date && proposed_end_date > booked_end_date)
-        raise "no"
+      if (proposed_start_date < booked_end_date && proposed_end_date > booked_start_date) ||
+         (proposed_start_date > proposed_end_date)
+        raise "that time has already been booked"
       end
     end
   end
