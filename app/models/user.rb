@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
 
   before_validation :ensure_session_token
 
+  has_many  :cats
 
   def self.find_by_credentials(params)
     user = User.find_by_user_name(params[:user_name])

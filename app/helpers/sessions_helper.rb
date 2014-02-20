@@ -17,4 +17,5 @@ module SessionsHelper
     current_user.reset_session_token! if logged_in?
     session[:session_token] = nil
   end
+
 end

@@ -1,5 +1,13 @@
 class CatsController < ApplicationController
-  # before_filter :get_cat, [:show]
+  before_action :is_cat_owner, :only => [:edit, :update]
+
+  def is_cat_owner
+    get_cat
+    if current_user.id != @cat.user_id
+      flash.now[:errors] = ["You can only edit your own!"]
+      redirect_to cat_url(@cat)
+    end
+  end
 
   def index
     @cats = Cat.all
@@ -18,27 +26,23 @@ class CatsController < ApplicationController
 
   def create
     @cat = Cat.new(cat_params)
+    @cat.user_id = current_user.id
     if @cat.save
       redirect_to cat_url(@cat)
     else
-      flash[:errors] = @cat.errors.full_messages
+      flash.now[:errors] = @cat.errors.full_messages
       # redirect_to new_cat_url
       render :new
     end
   end
 
   def edit
-    get_cat
     render :edit
   end
 
   def update
-    get_cat
     if @cat.update_attributes(cat_params)
       redirect_to cat_url(@cat)
-    else
-      flash[:errors] = @cat.errors.full_messages
-      render :edit
     end
   end
 
@@ -48,6 +52,6 @@ class CatsController < ApplicationController
   end
 
   def cat_params
-    params.require(:cat).permit(:name, :age, :birth_date, :sex, :color)
+    params.require(:cat).permit(:name, :age, :birth_date, :sex, :color, :user_id)
   end
 end

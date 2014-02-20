@@ -19,6 +19,7 @@ class Cat < ActiveRecord::Base
   validates :name, :presence => true
   validates :sex, :presence => true, length: { is: 1 }
 
+  belongs_to  :user
   has_many  :cat_rental_requests, :dependent => :destroy, :order => 'start_date'
 
 end

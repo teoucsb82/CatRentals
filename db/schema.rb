@@ -30,9 +30,12 @@ ActiveRecord::Schema.define(version: 20140220212325) do
     t.string   "color",      null: false
     t.string   "name",       null: false
     t.string   "sex",        null: false
+    t.integer  "user_id",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "cats", ["user_id"], name: "index_cats_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "user_name",       null: false

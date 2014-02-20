@@ -1,4 +1,13 @@
 class CatRentalRequestsController < ApplicationController
+  before_action :is_cat_owner, :only => [:approve, :deny]
+
+  def is_cat_owner
+    cat = current_cat
+    if current_user.id != cat.user_id
+      flash.now[:errors] = ["You can't change the status on someone else's cat!"]
+      redirect_to cat_url(cat)
+    end
+  end
 
   def index
     @cat_rental_requests = CatRentalRequest.all
@@ -31,7 +40,7 @@ class CatRentalRequestsController < ApplicationController
     if @cat_rental_request.save
       redirect_to cat_url(@cat_rental_request.cat)
     else
-      flash[:errors] = @cat_rental_request.errors.full_messages
+      flash.now[:errors] = @cat_rental_request.errors.full_messages
       render :new
     end
   end
