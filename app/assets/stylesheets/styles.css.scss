@@ -54,3 +54,13 @@ hr {
   background-color: darken($navbarBackgroundHighlight, 20%);
 }
 
+.flash {
+    text-align: center;
+    padding:  .3em .4em;
+    margin:   0 auto .5em;
+    clear:    both;
+    max-width:  46.923em; /* 610/13 */  
+    *max-width: 45.750em; /* 610/13.3333 - for IE */
+    color: $navbarBackgroundHighlight;
+}
+
