@@ -1,9 +1,18 @@
 <div class="row">
 
-	<ul class="nav nav-tabs pull-right">
+	<ul class="nav nav-tabs">
 		<li><%= link_to "View All Cats", root_path %></li>
 		<li><%= link_to "Add A Cat", new_cat_url %></li>
 		<li><%= link_to "Request A Cat", new_cat_rental_request_url %></li>
 	</ul>
-	
+
+	<ul class="nav nav-tabs pull-right">
+		<% if logged_in? %>
+			<li><%= link_to "Log Off", session_url, :method => :delete %></li>
+		<% else %>
+			<li><%= link_to "Sign In", new_session_url %></li>
+			<li><%= link_to "Sign Up", new_user_url %></li>
+		<% end %>
+	</ul>
+
 </div>

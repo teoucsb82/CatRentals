@@ -2,6 +2,11 @@
 	<h1>Cats For Rent</h1>
 </center>
 
+<% if logged_in? %>
+Welcome back, <%= current_user.user_name %>.
+<% end %>
+
+
 <ul>
   <% @cats.each do |cat| %>
       <li><h3><%= link_to cat.name, cat_url(cat) %></h3></li>
