@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>CatsRental</title>
+  <title>99 Cats</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<% if flash %>
-	<%= flash[:errors] %>
-<% end %>
+<%= render 'layouts/header' %>
+<%= render 'layouts/flash' %>
 
 <div class="container">
 	<%= yield %>

@@ -41,3 +41,15 @@ hr {
     margin: 1em 0; padding: 0;
 }
 
+.nav-tabs {
+  border-bottom: 1px solid $accentColor;
+}
+.nav-tabs > li > a {
+  border: 0px solid $navbarBackgroundHighlight;
+}
+
+.nav > li > a:hover,
+.nav > li > a:focus {
+  text-decoration: none;
+  background-color: darken($navbarBackgroundHighlight, 20%);
+}
