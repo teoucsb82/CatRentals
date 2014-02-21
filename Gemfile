@@ -9,7 +9,6 @@ gem 'bootstrap-sass', '~> 2.3.2.1'
 
 gem 'bcrypt-ruby', :require => 'bcrypt'
 
-
 group :production do
 	gem 'pg'
 	gem 'rails_12factor'
@@ -43,6 +42,8 @@ end
 
 group :development do
 	gem 'sqlite3'
+	gem 'letter_opener'
+	gem 'better_errors'
 end
 
 # Use ActiveModel has_secure_password
